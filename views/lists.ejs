@@ -1,0 +1,38 @@
+<%- include("header"); -%>
+  
+  <div class = "search-box">
+    <form   id="form1" action="/compose" method="post"> 
+      <a href="/"><i class="bi bi-house-fill"></i></a>
+      <input id="search" type="text" name="newEntry" placeholder="  Create/Search lists" autocomplete="off">
+      <button style="margin-right: 8px" type="submit" name="list" value="<%=listTitle%>"><img src="images/searchIcon.png" alt="" width="20" height="20"></button>
+    </form>
+  </div>
+
+  <div class="box" id="heading">
+    <h1><%=listTitle%></h1>
+  </div>
+
+  <div class="box-entry">
+    <!-- Notice here we haven't used <%= %> inside <% %> -->
+      <% newEntries.forEach(function(item){%>  
+        <form action="/delete" method="post">
+          <div class="item">
+            <input type="checkbox" name="checkbox" value="<%=item._id%>" onchange="this.form.submit()">
+            <p><%=item.name%></p>
+          </div>
+          <input type="hidden" name="listName" value="<%=listTitle%>"></input>
+        </form>
+      <% })%>
+      <!-- action "/" h means post req home route se aai h -->
+      <form  class="item" action="/" method="post"> 
+        <input type="text" name="newEntry" placeholder="New item" autocomplete="off">
+        <button type="submit" name="list" value="<%=listTitle%>">+</button>
+      </form>
+  </div>
+ 
+  </body>
+  <footer >
+    <span style="font-size:18px">Copyright © <%=year%></span>
+  </footer>
+  </html>
+ 
